@@ -3,13 +3,10 @@
 <main class="main py-3">
    <div class="container content">
       <div class="Better_call_Saul">
-         <h2 class="py-2">Better call Saul</h2>
-         <img src="https://i.pinimg.com/originals/d4/72/80/d472809847040c741976c7cd07cc3568.jpg" class="img-fluid better_call_img" alt="better call saul">
+         <h2 class="py-2">Game blog</h2>
+         <img src="https://images.squarespace-cdn.com/content/v1/5edb18356cb927448d88a93f/1591499448720-OXA1J49CZ6C6K86MK42Q/VideoGameLEGENDS.jpg" class="img-fluid better_call_img" alt="better call saul">
          <p class="better_call_text">
-            Hi, I'm Saul Goodman. Did you know that you have rights? The Constitution says 
-            that there is. And I agree with her! I believe that every man, woman, or child in America is 
-            innocent until proven otherwise. That's why I'm fighting for you, Albuquerque!
-            Better call Saul!
+            A page about a blog with games, here you can post and comment on posts
          </p>
       </div>
       <hr>
@@ -18,11 +15,16 @@
          <?php foreach ($posts as $post) :?>
                <div class="col-md-3">
                   <div class="card" style="width: 18rem;">
-                     <a href="/?act=view&id=<?=$post['id']?>"><img src="https://i.pinimg.com/originals/7c/11/de/7c11dea46b3b915460e750a9f43e7498.jpg" class="card-img-top" alt="title"></a>
+                     <?php if ($post['imgPath']) :?>
+                        <a href="/?act=view&id=<?=$post['id']?>"><img src="<?= URL_PATH . '/assets/' . $post['imgPath']?>" class="card-img-top" alt="title"></a>
+                     <?php else :?>
+                        <a href="/?act=view&id=<?=$post['id']?>"><img src="https://mykaleidoscope.ru/x/uploads/posts/2022-09/1663158407_9-mykaleidoscope-ru-p-zlobnaya-ulibka-pinterest-12.jpg" class="card-img-top post-image" alt="title"></a>
+                     <?php endif?>
                      <div class="card-body">
                         <h5 class="card-title"><?= mb_substr($post['title'], 0, 50) . '...'?></h5>
                         <p class="card-text"><?= mb_substr($post['text'], 0, 40) . '...'?></p>
                         <p class="card-text"><?= mb_substr($post['createAt'], 0, 10)?></p>
+                        <p class="card-text"><?= $post['username']?></p>
                         <a href="/?act=view&id=<?=$post['id']?>" class="btn btn-primary">View</a>
                      </div>
                   </div>

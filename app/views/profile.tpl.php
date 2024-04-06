@@ -30,8 +30,8 @@
                   <td><?= mb_substr($post['title'], 0, 50) . '...'?></td>
                   <td><?= $post['createAt']?></td>
                   <td>
-                     <a href=""><button class="btn btn-success">Edit</button></a>
-                     <a href=""><button class="btn btn-danger">Delete</button></a>
+                     <a href="/?act=edit&id=<?=$post['id']?>"><button class="btn btn-success">Edit</button></a>
+                     <a href="/?act=delete&id=<?=$post['id']?>"><button class="btn btn-danger">Delete</button></a>
                   </td>
                </tr>
             </tbody>

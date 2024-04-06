@@ -22,7 +22,7 @@ function printR($data) {
 
 function prd($data) {
    echo '<pre>';
-      var_dump($data);
+      print_r($data);
    echo '</pre>';
    die();
 }

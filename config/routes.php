@@ -8,4 +8,6 @@ $routes = [
    'profile' => 'profile.php',
    'logout' => 'logout.php',
    'view' => 'view.php',
+   'edit' => 'edit.php',
+   'delete' => 'delete.php',
 ];

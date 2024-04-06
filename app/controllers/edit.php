@@ -3,9 +3,22 @@ $user = getUser($_SESSION['userId']);
 checkUser();
 $error = [];
 
+$postId = (int)$_GET['id'];
+
+$stmt = $pdo->prepare("SELECT * FROM posts WHERE id = ? AND userId = ?");
+$stmt->execute([$postId, $user['id']]);
+
+$post = $stmt->fetch();
+
+if ($post['userId'] != $user['id']) {
+   header('Location: /');
+}
+
+
 if ($_SERVER['REQUEST_METHOD'] === "POST") {
    $title = trim(htmlspecialchars($_POST['title']));
    $text = trim(htmlspecialchars($_POST['text']));
+
    if (empty($title) || empty($text)) {
       $error[] = 'Fill all fields';
    } elseif (mb_strlen($title) < 5 || mb_strlen($title) > 255) {
@@ -13,20 +26,13 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
    } elseif (mb_strlen($text) < 15 || mb_strlen($text) > 2000) {
       $error[] = 'Text should be more than 15 and less than 2000 symbol';
    } else {
-
-      // простите за такую проверку
-      if (strpos($_FILES['file']['type'], 'mage/png') || strpos($_FILES['file']['type'], 'mage/jpg') 
-            || strpos($_FILES['file']['type'], 'mage/jpeg')) {
-         $imgName = time() . '_' . $_FILES['file']['name'];
-         move_uploaded_file($_FILES['file']['tmp_name'], DIR_PATH . "/assets/img/$imgName");
-      }
-      $sql = "INSERT INTO posts (`userId`, `title`, `text`, `imgPath`) VALUES (:userId, :title, :text, :imgPath)";
+      $sql = "UPDATE `posts` SET `title` = :title, `text` = :text WHERE id = :id AND userId = :userId";
       $stmtPost = $pdo->prepare($sql);
       $stmtPost->execute([
-         'userId' => $user['id'],
          'title' => $title,
          'text' => $text,
-         'imgPath' => "img/$imgName",
+         'id' => $postId,
+         'userId' => $user['id'],
       ]);
 
       header('Location: /?act=profile');
@@ -34,4 +40,4 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
    }
 }
 
-require_once VIEWS . '/add.tpl.php';
+require_once VIEWS . '/edit.tpl.php';
