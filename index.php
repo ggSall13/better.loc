@@ -8,6 +8,7 @@ require_once CONFIG . '/router.php';
 
 
 
+// git rm-r --cached assets/img
 
 // $stmt = $pdo->prepare("SELECT * FROM users");
 // $stmt->execute();

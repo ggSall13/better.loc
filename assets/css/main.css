@@ -66,3 +66,28 @@ footer {
 .post-image {
    max-height: 160.88px;
 }
+
+/* .post-image img {
+   max-width: 1140px;
+} */
+
+.view-title {
+   text-align: center;
+}
+
+.imageView {
+   width: 1300px;
+}
+
+
+.table_container {
+   height: 50vh;
+   overflow-y: scroll;
+}
+
+.comments_container {
+   border: 1px solid black;
+   background-color: #fafafa9d;
+   padding: 10px;
+   margin: 10px 0px 10px 0px;
+}

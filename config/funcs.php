@@ -1,6 +1,6 @@
 <?php
 
-function dd($data) {
+function dd($data = NULL) {
    echo '<pre>';
       var_dump($data);
    echo '</pre>';

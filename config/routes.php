@@ -10,4 +10,5 @@ $routes = [
    'view' => 'view.php',
    'edit' => 'edit.php',
    'delete' => 'delete.php',
+   'search' => 'search.php',
 ];

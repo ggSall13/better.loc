@@ -1,4 +1,6 @@
-<?php require_once INCS . '/header.php';?>
+<?php require_once INCS . '/header.php';
+
+?>
 
 <main class="main py-3">
    <div class="container content">
@@ -11,9 +13,24 @@
       </div>
       <hr>
       <h2 class="py-3 text-center">POSTS</h2> 
+      <nav aria-label="Page navigation example">
+         <ul class="pagination">
+            <?php if ($page > 1) :?>
+               <li class="page-item"><a class="page-link" href="/?page=<?= $page - 1?>">Previous</a></li>
+            <?php endif ?>
+            <?php for ($i = 1; $i <= $pages; $i++) :?>
+               <li class="page-item"><a class="page-link" href="/?page=<?=$i?>"><?= $i?></a></li>
+            <?php endfor;?>
+            <?php if (empty($_GET['page'])) :?>
+               <li class="page-item"><a class="page-link" href="/?page=<?= $page + 2?>">Next</a></li>
+               <?php elseif ($page < $pages) :?>
+               <li class="page-item"><a class="page-link" href="/?page=<?= $page + 1?>">Next</a></li>
+            <?php endif?>
+         </ul>
+      </nav>
       <div class="row">
          <?php foreach ($posts as $post) :?>
-               <div class="col-md-3">
+               <div class="col-md-3 py-3">
                   <div class="card" style="width: 18rem;">
                      <?php if ($post['imgPath']) :?>
                         <a href="/?act=view&id=<?=$post['id']?>"><img src="<?= URL_PATH . '/assets/' . $post['imgPath']?>" class="card-img-top" alt="title"></a>
