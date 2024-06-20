@@ -1,14 +1,14 @@
-<?php 
+<?php
 $stmtCount = $pdo->prepare("SELECT COUNT(*) FROM posts");
 $stmtCount->execute();
 $count = $stmtCount->fetchColumn();
 
 $maxPost = 8;
 
-$page = $_GET['page'];
+$page = isset($_GET['page']) ? $_GET['page'] : 1;
 
 $pages = ceil($count / $maxPost);
-$currentPage = (int)$_GET['page'] ?? 1;
+$currentPage = isset($_GET['page']) ?? 1;
 
 $currentPage = $currentPage > 1 ? $currentPage - 1 : 0;
 

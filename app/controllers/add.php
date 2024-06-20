@@ -15,23 +15,28 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
    } else {
 
       // простите за такую проверку
-      if (strpos($_FILES['file']['type'], 'mage/png') || strpos($_FILES['file']['type'], 'mage/jpg') 
-            || strpos($_FILES['file']['type'], 'mage/jpeg')) {
-         $imgName = time() . '_' . $_FILES['file']['name'];
-         move_uploaded_file($_FILES['file']['tmp_name'], DIR_PATH . "/assets/img/$imgName");
-      }
-         $sql = "INSERT INTO posts (`userId`, `title`, `text`, `imgPath`) VALUES (:userId, :title, :text, :imgPath)";
-         $stmtPost = $pdo->prepare($sql);
-         $stmtPost->execute([
-            'userId' => $user['id'],
-            'title' => $title,
-            'text' => $text,
-            'imgPath' => "img/$imgName",
-         ]);
+      // if (
+      //    isset($_FILES['file']['type']) && strpos($_FILES['file']['type'], 'mage/png') || strpos($_FILES['file']['type'], 'mage/jpg')
+      //    || strpos($_FILES['file']['type'], 'mage/jpeg')
+      // ) {
+      $imgName = time() . '_' . $_FILES['file']['name'];
+      move_uploaded_file($_FILES['file']['tmp_name'], DIR_PATH . "/assets/img/$imgName");
+      // }
+      $sql = "INSERT INTO posts (`userId`, `title`, `text`, `imgPath`) VALUES (:userId, :title, :text, :imgPath)";
+      $stmtPost = $pdo->prepare($sql);
+      $stmtPost->execute([
+         'userId' => $user['id'],
+         'title' => $title,
+         'text' => $text,
+         'imgPath' => "img/$imgName",
+      ]);
 
       header('Location: /?act=profile');
       die();
    }
+} else {
+   $title = '';
+   $text = '';
 }
 
 require_once VIEWS . '/add.tpl.php';

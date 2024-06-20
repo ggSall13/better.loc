@@ -1,17 +1,16 @@
-<?php 
+<?php
 
 $title = 'login';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-   $email = trim (htmlspecialchars($_POST['email']) );
-   $password = trim (htmlspecialchars($_POST['password']) );
+   $email = trim(htmlspecialchars($_POST['email']));
+   $password = trim(htmlspecialchars($_POST['password']));
 
    if (empty($email) || empty($password)) {
       $error[] = 'Fill all fields';
-   } elseif(mb_strlen($password) <= 5) {
+   } elseif (mb_strlen($password) <= 5) {
       $error[] = 'Uncorrect password';
-   }
-   else {
+   } else {
       $sql = "SELECT * FROM users WHERE `email` = ?";
       $stmtUser = $pdo->prepare($sql);
       $stmtUser->execute([$email]);
@@ -20,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
       if (!$user) {
          $error[] = 'Not found this User';
-      } elseif(password_verify($password, $user['password'])) {
+      } elseif (password_verify($password, $user['password'])) {
          $_SESSION['userId'] = $user['id'];
          $_SESSION['username'] = $user['username'];
 
@@ -28,6 +27,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
          die();
       }
    }
+} else {
+   $email = '';
 }
 
 

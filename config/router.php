@@ -3,7 +3,7 @@
 require_once CONFIG . '/routes.php';
 
 // $uri = trim( parse_url($_SERVER['REQUEST_URI'])['path'], '/' );
-$uri = $_GET['act'];
+$uri = isset($_GET['act']) ? $_GET['act'] : '';
 
 if (array_key_exists($uri, $routes)) {
    require_once CONTROLLERS . "/{$routes[$uri]}";

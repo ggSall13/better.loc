@@ -16,11 +16,11 @@
       <form action="" method="post">
          <div class="mb-3">
             <label for="email" class="form-label">Email address</label>
-            <input type="email" name="email" class="form-control" id="email" value="<?= $email?>" placeholder="name@example.com">
+            <input type="email" name="email" class="form-control" id="email" value="<?= $email ?>" placeholder="name@example.com">
          </div>
          <div class="mb-3">
             <label for="username" class="form-label">Your Username</label>
-            <input type="text" name="username" class="form-control" id="username" value="<?= $username?>" placeholder="username">
+            <input type="text" name="username" class="form-control" id="username" value="<?= $username ?>" placeholder="username">
          </div>
          <div class="mb-3">
             <label for="password" class="form-label">Password</label>
@@ -36,4 +36,4 @@
 </main>
 
 
-<?php require_once INCS . '/footer.php'?>
+<?php require_once INCS . '/footer.php' ?>

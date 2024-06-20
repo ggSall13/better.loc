@@ -1,4 +1,4 @@
-<?php 
+<?php
 $postId = (int)$_GET['id'];
 
 $user = getUser($_SESSION['userId']);
